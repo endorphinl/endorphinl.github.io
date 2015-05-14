@@ -1,0 +1,28 @@
+<html>
+<head>
+    <title>endorhpin blog - YAB</title>
+    <link rel="stylesheet" href="/assets/css/posts.css">
+</head>
+<body>
+    <div class="container">
+        <div class="content_wrapper">
+            <div class="content">
+                <h1>Rails: one to many relation between tables</h1>
+                <span class="post_meta">
+                    by hokjoung on 2013
+                </span>
+                <div class="post_body">
+                    1. 'has_many :spices' in food model</br>
+                    2. 'belongs_to :food' in spices model (grammar matters! singular when belonging to one)</br>
+                    3. add new column 'food_id' to the table that 'belongs_to'(spice)</br>
+                    4. edit view of spices. account for addition of new column</br>
+                    5. take note that perhaps it is useful to use a 'select' in '_form' when choosing food because otherwise it will show the food_id which are integers</br>
+                    6. edit 'index.html' to however one wants to display</br>
+                    7. edit 'show.html' to however one wants to display the additional info</br>
+                    8. edit 'show.html' of foods to however one wants to display. no need to do the steps done before as those steps already accomplishes the connection between spices and foods.</br>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<html>
+<head>
+    <title>endorhpin blog - YAB</title>
+    <link rel="stylesheet" href="/assets/css/posts.css">
+</head>
+<body>
+    <div class="container">
+        <div class="content_wrapper">
+            <div class="content">
+                <h1>Git tips</h1>
+                <span class="post_meta">
+                    by hokjoung on 2014
+                </span>
+                <div class="post_body">
+                    1 .gitconfig</br>
+                    [alias]</br>
+                            co = checkout</br>
+                            ci = commit</br>
+                            st = status</br>
+                            br = branch</br>
+                            hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short</br>
+                            type = cat-file -t</br>
+                            dump = cat-file -p</br></br>
+
+                    2 must to 'git init' to make the directory into a repository</br>
+                    3 'git co master' to get checkout to latest branch</br>
+                    4 'git reset --hard <hash></br>
+                    5 'ls .git/refs/tags' then 'cat .git/refs/tags/v1' </br>
+                    then you should recognize the files in the tags subdirectory. Each file corresponds to a tag you created with the git tag command earlier. Its content is just the hash of the commit tied to the tag.</br>
+                    6 'git dump' to figure out to see whats inside</br>
+                    7</br></br>
+
+                    Don’t use rebase …</br></br>
+
+                    If the branch is public and shared with others. Rewriting publicly shared branches will tend to screw up other members of the team.</br>
+                    When the exact history of the commit branch is important (since rebase rewrites the commit history).</br>
+                    Given the above guidelines, I tend to use rebase for short-lived, local branches and merge for branches in the public repository.</br></br>
+
+                    8 git clone hello cloned_hello</br>
+                    9 git remote (shows remote repositories)</br>
+                    10 git branch (see local branches)</br>
+                    11 git branch -a (see all branches including remote branches)</br>
+                    12 git fetch (literally just fetch from changes made in original to current remote repo; so, the current remote repo HEAD is still in the prev commit. in other words, merge has not been done yet)</br>
+                    13 git pull (equivalent to 'git fetch' and 'git merge origin/master' done at the same time)</br>
+                    14 git push shared master</br></br></br>
+
+
+                    dont understand bare repository?</br>
+                    how come we did 'git clone --bare hello hello.git', so making a clone, but 'hello.git' is not a remote repo. should'nt the 'git clone' command automatically connect the newly made repo as a remote of the original?</br></br></br>
+
+
+
+                    git clone https://hokjoung-pg@github.com/hokjoung-pg/practice.git cloned_practice</br></br>
+
+                    1. git clone</br>
+                    2. git checkout -b 'branch 이름'</br>
+                    3. 파일에 바꿀거 바꾸고</br>
+                    4. git add .</br>
+                    5. git commit -m "바뀐 내용 간략하게 적기"</br>
+                    6. git push origin 'branch 이름'</br></br>
+
+                    git remote add upstream https://hokjoung-pg@github.com/BrainCom/practice.git</br>
+                    git fetch upstream</br>
+                    git merge upstream/master</br>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

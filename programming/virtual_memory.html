@@ -1,0 +1,32 @@
+<html>
+<head>
+    <title>endorhpin blog - YAB</title>
+    <link rel="stylesheet" href="/assets/css/posts.css">
+</head>
+<body>
+    <div class="container">
+        <div class="content_wrapper">
+            <div class="content">
+                <h1>Virtual memory</h1>
+                <span class="post_meta">
+                    by not_me on 2015
+                </span>
+                <div class="post_body">
+                    <p>Virtual memory is an address space in which every addressable location can be used, regardless of how much physical memory is available on the machine. For example, a program can access the virtual address at 16GB even if the system only has 4GB of physical memory.</p>
+                    <p>This is made possible by mapping those virtual addresses that are in use to physical addresses in a backing store (usually physical memory), or sometimes several backing stores (physical memory and a disk drive).</p>
+                    <p>Pages</p>
+                    <p>To map every single virtual address to a physical address would require a mapping that's as large as the virtual memory itself, so instead chunks of memory called pages are mapped. Pages are often 4kB in size, though larger page sizes are of course possible. The mapping between a virtual page and a physical page (e.g. the virtual page at the 16GB address might be mapped to the physical page at the 2GB address) is maintained in structures called page tables.</p>
+                    <p>Swapping</p>
+                    <p>What you're referring to is called swapping. Often physical memory (RAM) and a hard drive are used as the backing store for virtual memory. The area on the hard drive used to do this is called the page file, the swap partition, or the swap space.</p>
+                    <p>Since physical memory is much faster than a hard drive, it is the preferred location for mapping pages, however when more virtual memory is being used than there exists physical memory to support it, some pages must be swapped out to disk to make space for allocating new pages in physical memory.</p>
+                    <p>When a virtual page that's actually stored on the disk is accessed by a program, it must be put back into physical memory again. This may cause an existing page in memory to be swapped out to disk to make room.</p>
+                    <p>Since reading from or writing to disk is very slow in comparison to reading from or writing to memory, swapping pages in and out from the disk is very slow, and the Operating System tries to minimize it or avoid it if possible. This is one of the reasons why, when your computer starts to run low on physical memory, it becomes very slow: programs end up having to wait for a long time while pages they need are swapped back in from disk to memory, and the Operating System spends a lot of time writing pages back out from memory to the disk.</p>
+                    <p>Page Replacement</p>
+                    <p>How does the Operating System decide which page of physical memory to swap out to disk when space is required? This is called a page replacement strategy, or algorithm. There are many, each with different advantages and disadvantages, but here are a few examples:</p>
+                    <p>LRU (Least Recently Used). The page in physical memory that is that hasn't been accessed for the longest period of time is swapped out to disk to make room for a new one.NFU (Not Frequently Used). Pages which have been accessed the least are swapped out to disk.Random. The page that is swapped out is chosen at random.FIFO (First in, First out). When a page is first placed in physical memory, it goes to the back of a queue. When a page reaches the front of the queue, it is swapped out to disk the next time a page swap is required.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

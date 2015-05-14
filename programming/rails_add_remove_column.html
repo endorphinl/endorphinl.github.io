@@ -1,0 +1,26 @@
+<html>
+<head>
+    <title>endorhpin blog - YAB</title>
+    <link rel="stylesheet" href="/assets/css/posts.css">
+</head>
+<body>
+    <div class="container">
+        <div class="content_wrapper">
+            <div class="content">
+                <h1>Rails: add or remove column</h1>
+                <span class="post_meta">
+                    by hokjoung on 2013
+                </span>
+                <div class="post_body">
+                    1. rails g migration add_color_to_sauce color:string //not necessary to specify the table name because rails is smart.</br>
+                    2. check appropriate migrate file in /db/migrate with the name 'add_color_to_sauce'</br>
+                        (for removing, might have to manually write in the 'remove_column()' function in migrate file)</br>
+                    3. rake db:migrate //actually add the column or delete the column in db</br>
+                    4. change 'param' in 'sauces_controller' (controller for appropriate table)</br>
+                    5. change appropriately the _form , index , show view. (might have to change add, edit if the two do not use _from) (again, change view of appropriate table)</br>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<html>
+<head>
+    <title>endorhpin blog - YAB</title>
+    <link rel="stylesheet" href="/assets/css/posts.css">
+</head>
+<body>
+    <div class="container">
+        <div class="content_wrapper">
+            <div class="content">
+                <h1>Rails: File extension resolver</h1>
+                <span class="post_meta">
+                    by hokjoung on 2015
+                </span>
+                <div class="post_body">
+                    # An abstract class that implements a Resolver with path semantics.
+                    class PathResolver < Resolver #:nodoc:
+                        EXTENSIONS = { :locale => ".", :formats => ".", :variants => "+", :handlers => "." }
+                        DEFAULT_PATTERN = ":prefix/:action{.:locale,}{.:formats,}{+:variants,}{.:handlers,}"
+                    <p>reference: <a href="https://github.com/rails/rails/blob/77a7c4bf7d2ed73cbc2554ef9f0514f6191b2658/actionview/lib/action_view/template/resolver.rb#L165">https://github.com/rails/rails/blob/77a7c4bf7d2ed73cbc2554ef9f0514f6191b2658/actionview/lib/action_view/template/resolver.rb#L165</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

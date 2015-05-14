@@ -1,0 +1,59 @@
+<html>
+<head>
+    <title>endorhpin blog - YAB</title>
+    <link rel="stylesheet" href="/assets/css/posts.css">
+</head>
+<body>
+    <div class="container">
+        <div class="content_wrapper">
+            <div class="content">
+                <h1>Installing MySQL</h1>
+                <span class="post_meta">
+                    by hokjoung on 2014
+                </span>
+                <div class="post_body">
+                    1. vim /hoktraining/config/database.yml<br/><br/>
+
+                    development:<br/>
+                      adapter: <br/>
+                      encoding: <br/>
+                      database: <br/>
+                      username: <br/>
+                      password: <br/>
+                      host:  (make sure this is the centos ip address instead of 127.0.0.1 if you are accessing from other computers)<br/>
+                      port: 3306<br/><br/>
+
+
+                    2. go to http://www.percona.com/doc/percona-server/5.5/installation/yum_repo.html<br/>
+                    3. do 'rpm -Uhv....'<br/>
+                    4. test if works using 'yum list | grep percona'<br/>
+                    5. go to http://www.percona.com/doc/percona-server/5.5/installation.html#using-percona-software-repositories?id=repositories:start<br/>
+                    6. yum install Percona-Server-client-55 Percona-Server-server-55 Percona-Server-devel-55<br/>
+                    7. it will tell where there are conflicts between percona and mysql<br/>
+                    8. use 'yum list mysql' to find it and then 'yum erase mysql'<br/>
+                    9. do step 5 again until successfully installed<br/>
+                    10. now need to start server using 'service mysql start' in any directory<br/>
+                    11. then use shortcut to setup passwords and delete tests using<br/><br/>
+
+                      '/usr/bin/mysql_secure_installation'<br/><br/>
+
+                    12. 'y' then set password -> 'y' for remove anonymous -> 'n' for disallow remote root login because will be using mysql workbench software on windows OS to access mysql db -> 'y' for remove test db -> 'y' for reload privilege tables<br/>
+
+                    13. 'gem install mysql2'<br/>
+                    14. go to /hoktraining dir then 'bundle install'<br/>
+                    15. add 'gem mysql2' into Gemfile in hoktraining<br/>
+                    16. 'mysql --user=root -p' then enter password<br/>
+                    17. 'create user 'root'@192.168.0.251 identified by '...';'<br/>
+                    18. 'grant all privileges on *.* to 'root'@192.168.0.251 with grant option;'<br/>
+                    19. 'create database hoktraining;'   'exit;'<br/>
+                    20. 'rake db:migrate'<br/>
+
+                    18. 'grant all privileges on *.* to 'root'@192.168.0.203 with grant option'<br/>
+                    19. download mysql workbench on windows OS<br/>
+                    20. Database -> Connect to Database 192.168.0.251 / root / now pw<br/>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

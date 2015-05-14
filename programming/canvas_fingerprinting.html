@@ -1,0 +1,24 @@
+<html>
+<head>
+    <title>endorhpin blog - YAB</title>
+    <link rel="stylesheet" href="/assets/css/posts.css">
+</head>
+<body>
+    <div class="container">
+        <div class="content_wrapper">
+            <div class="content">
+                <h1>Canvas fingerprinting</h1>
+                <span class="post_meta">
+                    by not_me on 2015
+                </span>
+                <div class="post_body">
+                    <p>Basically every computer/device draws graphics to an HTML5 canvas element slightly differently due to the variation in GPU drivers etc. That difference is the unique fingerprint which can be collected and later used to identify a device.</p>
+                    <p>When you first visit one of these tracking websites, they would generate the fingerprint and store it in a database, so the next time you visit they generate the fingerprint again and match it to one already stored.</p>
+                    <p>Keep in mind, the scripts might also fingerprint other unique characteristics similar to this and combine them to improve accuracy.</p>
+                    <p>And then you have steganography for concealing this further. Consider a rudimentary case where a streaming music service interleaves your account id into the audio stream as a series or pattern of hidden/encrypted bytes that you literally cannot hear in the music, so if you happen to make a recording of it and share/seed it online, they will know where it originated from by deciphering those bytes and acquiring your user id. And that's what you call a watermark(a component of DRM that helps get you prosecuted for copyright infringement).</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

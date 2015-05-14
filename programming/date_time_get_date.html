@@ -1,0 +1,27 @@
+<html>
+<head>
+    <title>endorhpin blog - YAB</title>
+    <link rel="stylesheet" href="/assets/css/posts.css">
+</head>
+<body>
+    <div class="container">
+        <div class="content_wrapper">
+            <div class="content">
+                <h1>DateTime get Date</h1>
+                <span class="post_meta">
+                    by hokjoung on 2014
+                </span>
+                <div class="post_body">
+irb(main):180:0* d.map{|key, value| key}
+=> [Wed, 28 May 2014 00:00:00 UTC +00:00]
+irb(main):181:0> d.map{|key, value| Date.parse(key.to_s)}
+=> [Wed, 28 May 2014]
+irb(main):182:0> d.map{|key, value| Date.parse(key.to_s).to_s}
+=> ["2014-05-28"]
+irb(main):183:0> 
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

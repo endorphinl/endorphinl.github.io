@@ -1,0 +1,45 @@
+<html>
+<head>
+    <title>endorhpin blog - YAB</title>
+    <link rel="stylesheet" href="/assets/css/posts.css">
+</head>
+<body>
+    <div class="container">
+        <div class="content_wrapper">
+            <div class="content">
+                <h1>Installing ImageMagick</h1>
+                <span class="post_meta">
+                    by hokjoung on 2014
+                </span>
+                <div class="post_body">
+                    1. tar -xvzf ImageMagick-6.8.8-1</br>
+                    2. go into unzipped folder then './configure' then 'make' then 'make install'</br>
+                    3. tar -xvzf libpng-1.6.8.tar.gz  then do step 2 for this folder</br>
+                    4. type below into terminal</br>
+                    </br>
+                    PKG_CONFIG_PATH=/usr/local/lib/pkgconfig</br>
+                    export PKG_CONFIG_PATH</br>
+                    gem install rmagick -v '2.13.2'  -- --disable-htmldoc</br></br>
+
+                    5. gem install carrierwave</br>
+                    6. add following into Gemfile of rails application</br></br>
+
+                    gem 'rmagick'</br>
+                    gem 'carrierwave'</br></br>
+
+                    *Here on forth, I copy pasted parts of the instructions from https://github.com/carrierwaveuploader/carrierwave</br>
+                    so that simply the basics is setup</br></br>
+
+                    7. 'rails g uploader FoodPicture'</br>
+                    8. 'rails g migration add_picture_to_foods picture:string'</br>
+                    9. 'rake db:migrate'</br>
+                    10. add :picture and :picture_cached into param of food controller</br>
+                    11. go to views of food then open _form.html</br>
+                    12. add below to appropriate part in _form.html</br>
+                    13. then edit the show.html in food view. add line below to
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
