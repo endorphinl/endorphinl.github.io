@@ -1,0 +1,52 @@
+body {
+    background-color: #eee;
+    height: 100%;
+}
+.container {
+    width: 100%;
+    max-width: 1070px;
+    min-width: 320px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.content_wrapper {
+    width: 100%;
+    padding: 20px 4%;
+    background-color: #fff;
+}
+.container .content h1 {
+    font-weight: 800;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+}
+h1, h2, h3, h4, h5, h6 {
+    color: #000;
+    font-family: "Open Sans";
+    text-rendering: optimizeLegibility;
+    padding: 0.273em 0;
+    line-height: 1.155em;
+}
+h1 {
+    font-size: 4.25rem;
+}
+h4 {
+    font-size: 1.625rem;
+}
+.post_body p {
+    color: #000;
+    font-family: "Open Sans";
+    font-weight: 400;
+    font-size: 1rem;
+    margin-bottom: 13px;
+    line-height: 1.625em;
+}
+.post_list a {
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: -1px;
+    color: #000;
+}
+.post_list a:hover {
+    text-decoration: none;
+    color: #2db8c2;
+}
