@@ -53,7 +53,18 @@ h4 {
 }
 .post_list a:hover {
     text-decoration: none;
+}
+.post_list.programming a:hover {
     color: #2db8c2;
+}
+.post_list.thoughts a:hover {
+    color: #e4a838;
+}
+.post_list.short_stories a:hover {
+    color: #f9622f;
+}
+.post_list.books a:hover {
+    color: #95397a;
 }
 .navcontainer {
     80px;
