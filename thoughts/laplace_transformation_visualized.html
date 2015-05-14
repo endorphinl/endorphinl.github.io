@@ -1,0 +1,47 @@
+<html>
+<head>
+    <title>endorhpin blog - YAB</title>
+    <link rel="stylesheet" href="/assets/css/posts.css">
+</head>
+<body>
+    <div class="navcontainer">
+        <div class="nav">
+            <div class="container" style="position: relative;">
+                <div class="logo_container">
+                    <a class="logo" href="/">endorphin blog</a>
+                </div>
+                <ul class="menu_container" style="float: left;">
+                    <li class="programming"><a href="/programming/index.html">Programming</a></li>
+                    <li class="thoughts"><a href="/thoughts/index.html">Day dreaming</a></li>
+                    <li class="short_stories"><a href="/short_stories/index.html">Short stories</a></li>
+                    <li class="books"><a href="/books/index.html">Books</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="post container">
+        <div class="content_wrapper">
+            <div class="content">
+                <h1>Laplace transformation visualized</h1>
+                <span class="post_meta">
+                    by not_me on 2014
+                </span>
+                <div class="post_body">
+                    <p>Can someone please please please show me a visual representation of the Laplace transform? I can go through the motions of finding the Laplace transform for any differential equation, but I have no idea what I am actually doing. What is actually happening to the data? From what new perspective am I viewing the data?</p>
+                    <p>I feel like I have an intuitive understanding of what is going on during a Fourier transform, but the Laplace is just complete strange magic to me.</p>
+
+                    <p>If you have some time, this is a really great video on the subject:</p>
+                    <p>http://ocw.mit.edu/courses/mathematics/18-03-differential-equations-spring-2010/video-lectures/lecture-19-introduction-to-the-laplace-transform/</p>
+
+                    <p>I hear this explanation all the time that says that the Laplace transform switches a function from the time domain to the frequency domain, but I don't know what to take from that or even how to take it. What does that mean, exactly?</p>
+
+                    <p>Basically what this means is that a laplace transform allows you to look at the way that a function reacts to certain frequencies.</p>
+                    <p>This is something that is a bit hard to wrap your head around but to help visualize it think about car suspension on a wash-board road. If the car is moving slowly and/or the bumps are far apart the car will follow the bumps in the road; as the frequency increases (the car speeds up, or the bumps get closer together) the car will not be able to move fast enough to follow the bumps exactly and will tend to skim over the top relatively level (this video shows this effect reasonably well - https://www.youtube.com/watch?v=2_EfVxSu750). This is effectively demonstrates the frequency response of the car, in that it responds to low frequency but after a point when the frequency is increasing, the response diminishes.</p>
+                    <p>Something else that helps to visualize converting to the frequency domain is a Fourier transform. Certain algorithms (namely the fast Fourier transform) use fourier transforms to show the underlying frequencies in data actual data.This picture(http://en.wikipedia.org/wiki/Fast_Fourier_transform#mediaviewer/File:Time_domain_to_frequency_domain.jpg)  shows a seemingly complex waveform which is analyzed to show that it is two signals added together. The X-axis is the frequency of the underlying signals while the Y-axis is the magnitude of each of those signals at their respective frequencies.</p>
+                    <p>Looking at frequency response is commonly used in engineering and other math/science fields as it allows a more accurate model of the way a complex system will respond to inputs and is a powerful tool for analyzing data.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
