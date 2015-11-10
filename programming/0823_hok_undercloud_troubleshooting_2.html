@@ -1,0 +1,79 @@
+devtest_seed.sh에서 boot-seed-vm script를 실행한다.
+devtest_seed.sh
+233
+234
+boot-seed-vm $CACHE_OPT $BUILD_ONLY -a $NODE_ARCH $NODE_DIST $DEBUG_LOGGING neutron-dhcp-agent 2>&1 | \
+        tee $TRIPLEO_ROOT/dib-seed.log
+boot-seed-vm이라는 script 내부에서 $REMOTE_OPERATIONS가 null이기에 210번째 줄의 virsh start를 한다.
+이후에, poll_vm이라는 함수를 부른다다. $VM_IP가 null이기에 197번째 줄에서 가상머신의 mac주소를 이용하여 198번째 줄에서 arp -n에서 해당 mac주소와 일치하는 것의 ip 주소를 가지고 와서 $VM_IP에 저장한다.
+그렇기에 이 부분에서는 vm에 ip를 할당하는 부분이 아니다.
+boot-seed-vm  Collapse source
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+function poll_vm {
+    if [ -z "$VM_IP" ]; then # if $VM_IP is null then
+        MAC=$(sudo virsh dumpxml $IMAGE_NAME | grep "mac address" | head -1 | awk -F "'" '{print $2}')
+        VM_IP=$(arp -n | grep $MAC | awk '{print $1}') # this only gets the ip thats already listed in arp -n. which means the vm_ip is set beforehand
+    fi 
+    [ -z $VM_IP ] && return 1
+    ping -c 1 $VM_IP || return 1
+    return 0
+}
+export -f poll_vm
+ 
+if [ -n "$REMOTE_OPERATIONS" ]; then # if $REMOTE_OPERATIONS is not null then
+    ssh -o StrictHostKeyChecking=no -o PasswordAuthentication=no ${VM_HOST} virsh start ${IMAGE_NAME}_$ENV_NUM
+    VM_IP=$(os-apply-config -m $TE_DATAFILE --key seed-ip --type netaddress --key-default '')
+else
+    sudo virsh start $IMAGE_NAME
+fi
+ 
+echo "Waiting for $IMAGE_NAME VM to boot."
+wait_for -w 100 --delay 1 -- poll_vm
+poll_vm
+ 
+그러다면, virsh를 통해 vm을 처음으로 생성하고 mac주소를 할당받게 하는 devtest_testenv.sh를 실행한 이후에 arp -n에 ip가 있는지 확인해본결과, 없다.
+devtest_testenv.sh result  Collapse source
+stack@hokseed:~/tripleo$ devtest_testenv.sh $TE_DATAFILE --bm-networks ./bm_networks
+brbm
+ brbm                 active     yes           yes
+Network brbm destroyed
+ brbm                 inactive   yes           yes
+Network brbm has been undefined
+ 
+Network brbm defined from /dev/fd/63
+ 
+Network brbm marked as autostarted
+ 
+Network brbm started
+ 
+ 
+seed VM not running
+ 
+seed VM not defined
+Created machine seed with UUID be2a4109-658d-4800-8dc9-e8d8f30d5ae4
+Seed VM created with MAC 52:54:00:96:02:cf
+stack@hokseed:~/tripleo$ arp -n
+Address                  HWtype  HWaddress           Flags Mask            Iface
+192.168.0.1              ether   00:08:9f:eb:89:c0   C                     p2p1
+172.16.100.52            ether   00:08:9f:eb:89:c0   C                     p2p1
+

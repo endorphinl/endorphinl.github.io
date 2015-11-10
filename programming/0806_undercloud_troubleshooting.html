@@ -1,0 +1,21 @@
+stack@hokseed:~/tripleo$ virsh domiflist seed
+Interface  Type       Source     Model       MAC
+-------------------------------------------------------
+vnet0      network    default    virtio      52:54:00:4c:98:43
+vnet1      bridge     brbm       virtio      00:d0:8b:99:ab:e4
+
+
+hokseed@hokseed:~$ arp -n
+Address                  HWtype  HWaddress           Flags Mask            Iface
+192.168.122.58                   (incomplete)                              virbr0
+192.168.122.141                  (incomplete)                              virbr0
+172.16.101.229           ether   00:08:9f:eb:89:c0   C                     p2p1
+192.168.0.1              ether   00:08:9f:eb:89:c0   C                     p2p1
+
+vs
+
+stack@hokseed:~/tripleo$ arp -n
+Address                  HWtype  HWaddress           Flags Mask            Iface
+192.168.122.113          ether   52:54:00:96:4d:73   C                     virbr0
+172.16.101.229           ether   00:08:9f:eb:89:c0   C                     p2p1
+192.168.0.1              ether   00:08:9f:eb:89:c0   C                     p2p1

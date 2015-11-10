@@ -1,0 +1,27 @@
+root@hokronic:~# ip netns exec qdhcp-be59842b-d424-401b-8093-73d7b84db1e6 ifconfig
+lo        Link encap:Local Loopback  
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          inet6 addr: ::1/128 Scope:Host
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:1 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:1 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:576 (576.0 B)  TX bytes:576 (576.0 B)
+ 
+tap575ea9c8-88 Link encap:Ethernet  HWaddr fa:16:3e:7a:91:f4  
+          inet addr:10.1.0.2  Bcast:10.1.0.255  Mask:255.255.255.0
+          inet6 addr: fe80::f816:3eff:fe7a:91f4/64 Scope:Link
+          inet6 addr: fdd3:3782:26ca:0:f816:3eff:fe7a:91f4/64 Scope:Global
+          UP BROADCAST RUNNING  MTU:1500  Metric:1
+          RX packets:8681 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:10 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:954702 (954.7 KB)  TX bytes:836 (836.0 B)
+ 
+root@hokronic:~# ip netns exec qdhcp-be59842b-d424-401b-8093-73d7b84db1e6 ps -ef | grep dns
+root     14807 14518  0 06:36 pts/0    00:00:00 grep --color=auto dns
+nobody   30337     1  0 Aug10 ?        00:00:00 dnsmasq --no-hosts --no-resolv --strict-order --bind-interfaces --interface=tap575ea9c8-88 --except-interface=lo --pid-file=/opt/stack/data/neutron/dhcp/be59842b-d424-401b-8093-73d7b84db1e6/pid --dhcp-hostsfile=/opt/stack/data/neutron/dhcp/be59842b-d424-401b-8093-73d7b84db1e6/host --addn-hosts=/opt/stack/data/neutron/dhcp/be59842b-d424-401b-8093-73d7b84db1e6/addn_hosts --dhcp-optsfile=/opt/stack/data/neutron/dhcp/be59842b-d424-401b-8093-73d7b84db1e6/opts --dhcp-leasefile=/opt/stack/data/neutron/dhcp/be59842b-d424-401b-8093-73d7b84db1e6/leases --dhcp-match=set:ipxe,175 --dhcp-range=set:tag1,10.1.0.0,static,86400s --dhcp-lease-max=256 --conf-file= --domain=openstacklocal
+
+root@hokronic:~# ps -ef | grep dns
+root     15294 14518  0 06:37 pts/0    00:00:00 grep --color=auto dns
+nobody   30337     1  0 Aug10 ?        00:00:00 dnsmasq --no-hosts --no-resolv --strict-order --bind-interfaces --interface=tap575ea9c8-88 --except-interface=lo --pid-file=/opt/stack/data/neutron/dhcp/be59842b-d424-401b-8093-73d7b84db1e6/pid --dhcp-hostsfile=/opt/stack/data/neutron/dhcp/be59842b-d424-401b-8093-73d7b84db1e6/host --addn-hosts=/opt/stack/data/neutron/dhcp/be59842b-d424-401b-8093-73d7b84db1e6/addn_hosts --dhcp-optsfile=/opt/stack/data/neutron/dhcp/be59842b-d424-401b-8093-73d7b84db1e6/opts --dhcp-leasefile=/opt/stack/data/neutron/dhcp/be59842b-d424-401b-8093-73d7b84db1e6/leases --dhcp-match=set:ipxe,175 --dhcp-range=set:tag1,10.1.0.0,static,86400s --dhcp-lease-max=256 --conf-file= --domain=openstacklocal

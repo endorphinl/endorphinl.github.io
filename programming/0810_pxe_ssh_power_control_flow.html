@@ -1,0 +1,188 @@
+* Power Status Check 
+ 
+ironic/drivers/pxe.py >> PXEAndSSHDriver
+def __init__(self):
+    self.power = ssh.SSHPower()
+    self.boot = pxe.PXEBoot()
+    self.deploy = iscsi_deploy.ISCSIDeploy()
+    self.management = ssh.SSHManagement()
+    self.vendor = iscsi_deploy.VendorPassthru()
+    self.inspect = inspector.Inspector.create_if_enabled(
+        'PXEAndSSHDriver')
+ 
+ironic/drivers/modules/ssh.py  
+> SSHPower  : base.PowerInterface
+     power_state (DB) / reboot
+>> _power_on 
+
+class PXEAndSSHDriver(base.BaseDriver):
+ 
+    """PXE + SSH driver.
+ 
+ 
+ 
+    NOTE: This driver is meant only for testing environments.
+ 
+ 
+ 
+    This driver implements the `core` functionality, combining
+ 
+    :class:`ironic.drivers.modules.ssh.SSH` for power on/off and
+ 
+    reboot of virtual machines tunneled over SSH, with
+ 
+    :class:`ironic.drivers.modules.iscsi_deploy.ISCSIDeploy` for
+ 
+    image deployment. Implementations are in those respective
+ 
+    classes; this class is merely the glue between them.
+ 
+    """
+ 
+    def __init__(self):
+ 
+        self.power = ssh.SSHPower()
+ 
+        self.boot = pxe.PXEBoot()
+ 
+        self.deploy = iscsi_deploy.ISCSIDeploy()
+ 
+        self.management = ssh.SSHManagement()
+ 
+        self.vendor = iscsi_deploy.VendorPassthru()
+ 
+        self.inspect = inspector.Inspector.create_if_enabled(
+ 
+            'PXEAndSSHDriver')
+ 
+<<Ironic>>
+class ConductorManager(periodic_task.PeriodicTasks):
+_do_sync_power_.. (periodic) >do_sync_power_state > node_power_action
+conductor/manager.py:            utils.node_power_action(task, node.power_state)
+ 
+node_power_action > set_power_state > power_on
+ 
+@task_manager.require_exclusive_lock
+def node_power_action(task, new_state):
+
+conductor/utils.py:            task.driver.power.set_power_state(task, new_state)
+ 
+@task_manager.require_exclusive_lock
+ 
+def set_power_state(self, task, pstate):
+ 
+    """Turn the power on or off.
+ 
+ 
+ 
+ 
+    Set the power state of the task's node.
+ 
+ 
+ 
+ 
+    :param task: a TaskManager instance containing the node to act on.
+ 
+    :param pstate: Either POWER_ON or POWER_OFF from :class:
+ 
+        `ironic.common.states`.
+ 
+    :raises: InvalidParameterValue if any connection parameters are
+ 
+        incorrect, or if the desired power state is invalid.
+ 
+    :raises: MissingParameterValue when a required parameter is missing
+ 
+    :raises: NodeNotFound.
+ 
+    :raises: PowerStateFailure if it failed to set power state to pstate.
+ 
+    :raises: SSHCommandFailed on an error from ssh.
+ 
+    :raises: SSHConnectFailed if ssh failed to connect to the node.
+ 
+    """
+ 
+    driver_info = _parse_driver_info(task.node)
+ 
+    driver_info['macs'] = driver_utils.get_node_mac_addresses(task)
+ 
+    ssh_obj = _get_connection(task.node)
+ 
+ 
+ 
+ 
+    if pstate == states.POWER_ON:
+ 
+        state = _power_on(ssh_obj, driver_info)
+ 
+    elif pstate == states.POWER_OFF:
+ 
+        state = _power_off(ssh_obj, driver_info)
+ 
+    else:
+ 
+        raise exception.InvalidParameterValue(
+ 
+            _("set_power_state called with invalid power state %s."
+ 
+              ) % pstate)
+ 
+ 
+ 
+ 
+    if state != pstate:
+ 
+        raise exception.PowerStateFailure(pstate=pstate)
+ 
+ 
+def _power_on(ssh_obj, driver_info):
+ 
+    """Power ON this node.
+ 
+ 
+ 
+    :param ssh_obj: paramiko.SSHClient, an active ssh connection.
+    :param driver_info: information for accessing the node.
+ 
+    :returns: one of ironic.common.states POWER_ON or ERROR.
+ 
+ 
+ 
+    """
+ 
+    current_pstate = _get_power_status(ssh_obj, driver_info)
+ 
+    if current_pstate == states.POWER_ON:
+ 
+        _power_off(ssh_obj, driver_info)
+ 
+ 
+ 
+ 
+    node_name = _get_hosts_name_for_node(ssh_obj, driver_info)
+ 
+    cmd_to_power_on = "%s %s" % (driver_info['cmd_set']['base_cmd'],
+ 
+                                 driver_info['cmd_set']['start_cmd'])
+ 
+    cmd_to_power_on = cmd_to_power_on.replace('{_NodeName_}', node_name)
+ 
+ 
+ 
+ 
+    _ssh_execute(ssh_obj, cmd_to_power_on)
+ 
+ 
+ 
+ 
+    current_pstate = _get_power_status(ssh_obj, driver_info)
+ 
+    if current_pstate == states.POWER_ON:
+ 
+        return current_pstate
+ 
+    else:
+ 
+        return states.ERROR
+ 

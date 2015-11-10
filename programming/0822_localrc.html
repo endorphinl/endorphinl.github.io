@@ -1,0 +1,53 @@
+/opt/stack/devstack/lib/ironic
+https://github.com/swpark93/devstack/blob/master/lib/ironic
+ 
+#hardware_info --> /opt/stack/data/ironic/hardware_info
+#MAC wol_host wol_port
+ADMIN_PASSWORD=password
+MYSQL_PASSWORD=password
+RABBIT_PASSWORD=password
+SERVICE_PASSWORD=password
+SERVICE_TOKEN=password
+ 
+MULTI_HOST=1
+HOST_IP=192.168.0.105
+VOLUME_BACKING_FILE_SIZE=100000M
+VOLUME_BACKING_FILE=/data/openstack/stack-volumes-backing-file
+ 
+enable_service ironic
+enable_service ir-api
+enable_service ir-cond
+ 
+disable_service n-net
+enable_service q-svc
+enable_service q-agt
+enable_service q-dhcp
+enable_service neutron
+ 
+VIRT_DRIVER=ironic
+LOGFILE=stacklog-ironic
+LOGDAYS=3
+ 
+Q_ML2_TENANT_NETWORK_TYPE=flat
+ENABLE_TENANT_TUNNELS=False
+PHYSICAL_NETWORK=physnet1
+OVS_PHYSICAL_BRIDGE=br-p4p1
+Q_ML2_PLUGIN_TYPE_DRIVERS=flat
+Q_ML2_PLUGIN_MECHANISM_DRIVERS=openvswitch
+ENABLE_TENANT_VLANS=False
+Q_USE_PROVIDER_NETWORKING=True
+PUBLIC_INTERFACE=p4p1
+FLAT_NETWORK_BRIDGE=br-p4p1
+PROVIDER_NETWORK_TYPE=flat
+IRONIC_BAREMETAL_BASIC_OPS=True
+FIXED_RANGE=192.168.0.0/24
+NETWORK_GATEWAY=192.168.0.1
+ 
+IRONIC_DEPLOY_DRIVER=pxe_wol
+IRONIC_HW_NODE_CPU=1
+IRONIC_HW_NODE_RAM=8192
+IRONIC_HW_NODE_DISK=60
+ 
+IP_VERSION=4
+SERVICE_IP_VERSION=4
+IRONIC_ENABLED_DRIVERS=pxe_ipmitool,pxe_wol

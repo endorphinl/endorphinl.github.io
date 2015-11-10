@@ -1,0 +1,59 @@
+Action items
+Horizon Github : https://github.com/openstack/horizon/
+Horizon Network Topology : https://github.com/openstack/horizon/blob/master/horizon/static/horizon/js/horizon.networktopology.js, 
+                                             https://github.com/openstack/horizon/tree/master/openstack_dashboard/dashboards/project/network_topology
+GIT 사용법 : http://www.slideshare.net/fullscreen/einsub/svn-git-17386752/
+ 
+TrippleO : https://wiki.openstack.org/wiki/TripleO , http://www.ospn.jp/osc2014-fall/pdf/OSC2014_fall_HP.pdf - Step 참조.
+TrippleO Setup : http://docs.openstack.org/developer/tripleo-incubator/deploying.html
+ Image Element : https://github.com/openstack/tripleo-image-elements
+ TrippleO Incubator : https://github.com/openstack/tripleo-incubator
+SEED VM : https://github.com/openstack/tripleo-incubator/blob/master/scripts/setup-seed-vm
+
+<img src="/images/0730_1.png"/>
+ 
+https://docs.hpcloud.com/#commercial/GA1/1.0commercial.install-GA-prereqs.html#topic14044__installer
+https://www.rdoproject.org/TripleO_VM_Setup
+ 
+Self study
+obtaining ubuntu cloud -  http://docs.openstack.org/image-guide/content/ch_obtaining_images.html
+Troubleshootings
+hokwen & Chiheon Ham
+when rejoin-stack.sh, in c-vol
+ERROR cinder.service [-] Manager for service cinder-volume is reporting problems, skip sending heartbeat. Service will appear "down".
+create instance with respective flavor
+create volume matching flavor (devstack default volume backing size is 5GB) - volume backing size? does it have to match?
+attach volume to instance
+can’t use setup ISO as a boot image for instances because, whenever the instance restarts, it will go through the OS setup steps. Hence, we need to use image builder to build the basic image with components that are independent of hardware (http://cloud-images.ubuntu.com/releases/14.04/release/ - get cloud image at the top. ignore overwhelming amazon ec2 published list) - after OS setup, cant you just load from the volume next time instead of using boot image again?
+
+Chiheon Ham
+Triple O
+Error in installing devstack on vm
+stack@ubuntu-openstack:~/devstack$ ./stack.sh
+[Call Trace]
+./stack.sh:172:source
+/home/stack/devstack/stackrc:680:die
+[ERROR] /home/stack/devstack/stackrc:680 Could not determine host ip address. See local.conf for suggestions on setting HOST_IP.
+Solution
+Write HOST_IP in local.conf
+ 
+Hanging in connection to nova cloud
+stack@ubuntu-openstack:~/devstack$ ./stack.sh
+...
+0% [Connecting to nova.clouds.archive.ubuntu.com (91.189.91.15)] [Connecting to
+Solution
+localrc setting problem
+ 
+swpark
+PXE
+netboot, http://cdimage.ubuntu.com/netboot/14.04/
+preseed.cfg, https://help.ubuntu.com/12.04/installation-guide/example-preseed.txt
+setup, https://www.debian.org/releases/stable/i386/apbs04.html.en
+Ironic, http://www.slideshare.net/staybuzz/open-stackironic?related=1
+Problems
+Client1 (Dell) : No network interfaces detected
+Client2 (Samsung): No DHCP or proxyDHCP offers were received
+
+Job
+http://www.cloudbase.it/rebot/
+http://www.slideshare.net/MartonKiss1/hp-helion-openstack-community-edition-deployment-overview

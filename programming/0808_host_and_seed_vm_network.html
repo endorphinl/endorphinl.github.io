@@ -1,0 +1,21 @@
+위와 같은 NETFILE을 사용하지 않을 경우, Seed VM의 Default IP는 192.0.2.1로 잡히며, 192.0.2.0/24 대역을 사용하게 세팅
+
+INITIAL : HAM/HOK/PARK
+VDC_HAM_SEED : 192.168.0.103
+
+<CENTERNET> -  | <IPTIME/ROUTER> - <IPMI NET>
+                                                                   - <PXE / DHCP>
+ 172.16.100.52 (Ext Fwd)  -  192.168.0.x       -        192.0.2.x
+ 61.43.139.7 (Ext)
+
+ 172.16.100.x STATIC?
+ 172.16.101.x 개인용  (DHCP)
+ 
+route
+ 
+ Kernel IP routing table
+                        Destination     Gateway           Genmask            Flags Metric Ref    Use Iface
+                         default            192.168.0.1      0.0.0.0               UG    0      0        0   p2p1
+ <> <> <xxxx> 192.0.2.0       192.168.122.49  255.255.255.0   UG    0      0        0 virbr0   (RANGE!!)
+ <> <xxxxx> <> 192.168.0.0     *               255.255.255.0   U     0      0        0 p2p1  (eth0?)
+                            192.168.122.0   *               255.255.255.0   U     0      0        0 virbr0

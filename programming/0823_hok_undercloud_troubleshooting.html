@@ -1,0 +1,38 @@
+root     14134 14133  0 20:40 ?        00:00:00 /opt/stack/venvs/openstack/bin/python /usr/local/bin/os-apply-config --key bootstrap_host.bootstrap_nodeid --type netaddress
+ 
+testenv.json
+{
+  "nodes": [],
+  "ssh-user": "stack",
+  "ssh-key": "-----BEGIN RSA PRIVATE KEY-----[redacted]-----END RSA PRIVATE KEY-----",
+  "seed-ip": "192.168.122.213",
+  "power_manager": "nova.virt.baremetal.virtual_power_driver.VirtualPowerManager",
+  "host-ip": "192.168.122.1",
+  "arch": "amd64",
+  "baremetal-network": {
+    "cidr": "192.168.1.0/24",
+    "gateway-ip": "192.168.1.1",
+    "seed": {
+      "ip": "192.168.1.5",
+      "range-start": "192.168.1.21",
+      "range-end": "192.168.1.40"
+    },
+    "undercloud": {
+      "range-start": "192.168.1.41",
+      "range-end": "192.168.1.60"
+    }
+}
+devtest_testenv.sh와 devtest_seed.sh를 돌린 이후에 상황입니다.
+위 testenv.json에서 "seed-ip"는 kvm으로 head node에 돌아가고 잇는 seed vm의 ip (ssh root@192.168.122.213으로 접속이 됩니다)
+그러다면 baremetal-network.seed.ip는 무엇인가요? 분명히 "seed-ip"로 명시되잇는 ip로 ssh까지 성공햇는데 그러다면, baremetal-network의 seed는 무엇을 의미하는 건가요?
+그리고 왜 "tripleo-incubator/seedrc"에서 OS_AUTH_URL이 baremetal-network.seed.ip의 keystone을 가리키고 잇나요?
+tripleo-incubator/seedrc
+export NOVA_VERSION=1.1
+export OS_PASSWORD=unset
+export OS_AUTH_URL=http://$(os-apply-config -m $TE_DATAFILE --key baremetal-network.seed.ip --type raw --key-default '192.0.2.1'):5000/v2.0
+export OS_USERNAME=admin
+export OS_TENANT_NAME=admin
+export COMPUTE_API_VERSION=1.1
+export OS_NO_CACHE=True
+export OS_CLOUDNAME=seed
+

@@ -1,0 +1,228 @@
+stack@hokseed:~/tripleo$ devtest_setup.sh --trash-my-machine > ~/dib-setup.log
+ 
++ set -o pipefail
+ 
+++ basename /home/stack/tripleo/tripleo-incubator/scripts/devtest_setup.sh
+ 
++ SCRIPT_NAME=devtest_setup.sh
+ 
+++ dirname /home/stack/tripleo/tripleo-incubator/scripts/devtest_setup.sh
+ 
++ SCRIPT_HOME=/home/stack/tripleo/tripleo-incubator/scripts
+ 
++ CONTINUE=0
+ 
++ USE_CACHE=0
+ 
+++ getopt -o h,c -l trash-my-machine -n devtest_setup.sh -- --trash-my-machine
+ 
++ TEMP=' --trash-my-machine --'
+ 
++ '[' 0 '!=' 0 ']'
+ 
++ eval set -- ' --trash-my-machine --'
+ 
+++ set -- --trash-my-machine --
+ 
++ true
+ 
++ case "$1" in
+ 
++ CONTINUE=1
+ 
++ shift 1
+ 
++ true
+ 
++ case "$1" in
+ 
++ shift
+ 
++ break
+ 
++ '[' 0 = 1 ']'
+ 
++ '[' 0 == 0 ']'
+ 
++ '[' -z ''\'''\''' ']'
+ 
++ '[' ubuntu == unsupported ']'
+ 
++ '[' 0 = 0 ']'
+ 
++ install-dependencies
+ 
++ '[' 0 = 0 ']'
+ 
++ pull-tools
+ 
+Cloning into 'dib-utils'...
+ 
+remote: Counting objects: 170, done.
+ 
+remote: Compressing objects: 100% (93/93), done.
+ 
+remote: Total 170 (delta 48), reused 151 (delta 32)
+ 
+Receiving objects: 100% (170/170), 30.39 KiB | 0 bytes/s, done.
+ 
+Resolving deltas: 100% (48/48), done.
+ 
+Checking connectivity... done.
+ 
+Already on 'master'
+ 
+Cloning into 'heat-templates'...
+ 
+remote: Counting objects: 2443, done.
+ 
+remote: Compressing objects: 100% (1290/1290), done.
+ 
+remote: Total 2443 (delta 1374), reused 2039 (delta 1059)
+ 
+Receiving objects: 100% (2443/2443), 479.81 KiB | 243.00 KiB/s, done.
+ 
+Resolving deltas: 100% (1374/1374), done.
+ 
+Checking connectivity... done.
+ 
+Already on 'master'
+ 
+Cloning into 'tripleo-puppet-elements'...
+ 
+remote: Counting objects: 514, done.
+ 
+remote: Compressing objects: 100% (294/294), done.
+ 
+remote: Total 514 (delta 263), reused 421 (delta 190)
+ 
+Receiving objects: 100% (514/514), 70.30 KiB | 0 bytes/s, done.
+ 
+Resolving deltas: 100% (263/263), done.
+ 
+Checking connectivity... done.
+ 
+Already on 'master'
+ 
+Cloning into 'tripleo-ci'...
+ 
+remote: Counting objects: 2164, done.
+ 
+remote: Compressing objects: 100% (1082/1082), done.
+ 
+remote: Total 2164 (delta 1242), reused 1841 (delta 954)
+ 
+Receiving objects: 100% (2164/2164), 349.14 KiB | 248.00 KiB/s, done.
+ 
+Resolving deltas: 100% (1242/1242), done.
+ 
+Checking connectivity... done.
+ 
+Already on 'master'
+ 
+Cloning into 'os-cloud-config'...
+ 
+remote: Counting objects: 1331, done.
+ 
+remote: Compressing objects: 100% (672/672), done.
+ 
+remote: Total 1331 (delta 924), reused 993 (delta 629)
+ 
+Receiving objects: 100% (1331/1331), 231.49 KiB | 127.00 KiB/s, done.
+ 
+Resolving deltas: 100% (924/924), done.
+ 
+Checking connectivity... done.
+ 
+Already on 'master'
+ 
++ '[' 0 = 0 ']'
+ 
++ setup-clienttools
+ 
+/home/stack/tripleo/tripleo-incubator/openstack-tools/local/lib/python2.7/site-packages/pip/_vendor/requests/packages/urllib3/util/ssl_.py:90: InsecurePlatformWarning: A true SSLContext object is not available. This prevents urllib3 from configuring SSL appropriately and may cause certain SSL connections to fail. For more information, see https://urllib3.readthedocs.org/en/latest/security.html#insecureplatformwarning.
+ 
+  InsecurePlatformWarning
+ 
+/home/stack/tripleo/tripleo-incubator/openstack-tools/local/lib/python2.7/site-packages/pip/_vendor/requests/packages/urllib3/util/ssl_.py:90: InsecurePlatformWarning: A true SSLContext object is not available. This prevents urllib3 from configuring SSL appropriately and may cause certain SSL connections to fail. For more information, see https://urllib3.readthedocs.org/en/latest/security.html#insecureplatformwarning.
+ 
+  InsecurePlatformWarning
+ 
+/home/stack/tripleo/tripleo-incubator/openstack-tools/local/lib/python2.7/site-packages/pip/_vendor/requests/packages/urllib3/util/ssl_.py:90: InsecurePlatformWarning: A true SSLContext object is not available. This prevents urllib3 from configuring SSL appropriately and may cause certain SSL connections to fail. For more information, see https://urllib3.readthedocs.org/en/latest/security.html#insecureplatformwarning.
+ 
+  InsecurePlatformWarning
+ 
+    DEPRECATION: Uninstalling a distutils installed project (argparse) has been deprecated and will be removed in a future version. This is due to the fact that uninstalling a distutils project will only partially uninstall the project.
+ 
++ set-usergroup-membership
+
+
+
+
+
+stack@hokseed:~/tripleo$ grep -nr 'openstack-tool'
+ 
+tripleo-incubator/.gitignore:12:openstack-tools
+ 
+tripleo-incubator/scripts/setup-clienttools:5:VENV_HOME=$BASE/openstack-tools
+ 
+tripleo-incubator/scripts/setup-clienttools:12:# /opt/stack/new/tripleo-incubator/openstack-tools/bin/activate: line 8: _OLD_VIRTUAL_PATH: unbound variable
+
+
+
+
+
+
+stack@hokseed:~/tripleo$ grep -nr 'oslo'
+ 
+tripleo-incubator/test-requirements.txt:1:oslosphinx
+ 
+tripleo-incubator/doc/source/conf.py:17:    'oslosphinx',
+ 
+diskimage-builder/test-requirements.txt:7:oslotest>=1.5.1 # Apache-2.0
+ 
+diskimage-builder/test-requirements.txt:12:oslosphinx>=2.5.0 # Apache-2.0
+ 
+diskimage-builder/doc/source/conf.py:7:extensions = ['oslosphinx']
+ 
+diskimage-builder/elements/svc-map/tests/test_data_merge.py:21:from oslotest import base
+ 
+diskimage-builder/diskimage_builder/tests/base.py:23:from oslotest import base
+ 
+python-tuskarclient/tuskarclient/openstack/common/cliutils.py:27:from oslo_utils import encodeutils
+ 
+python-tuskarclient/tuskarclient/openstack/common/cliutils.py:28:from oslo_utils import strutils
+ 
+python-tuskarclient/tuskarclient/openstack/common/apiclient/client.py:37:from oslo_utils import encodeutils
+ 
+python-tuskarclient/tuskarclient/openstack/common/apiclient/client.py:38:from oslo_utils import importutils
+ 
+python-tuskarclient/tuskarclient/openstack/common/apiclient/base.py:43:from osl_utils import strutils
+ 
+python-tuskarclient/tuskarclient/openstack/common/apiclient/utils.py:27:from oslo_utils import encodeutils
+ 
+python-tuskarclient/tuskarclient/openstack/common/_i18n.py:13:"""oslo.i18n integration module.
+ 
+python-tuskarclient/tuskarclient/openstack/common/_i18n.py:15:See http://docs.openstack.org/developer/oslo.i18n/usage.html
+ 
+python-tuskarclient/tuskarclient/openstack/common/_i18n.py:20:    import oslo_i18n
+ 
+python-tuskarclient/tuskarclient/openstack/common/_i18n.py:27:    _translators = oslo_i18n.TranslatorFactory(domain='tuskarclient')
+ 
+python-tuskarclient/tuskarclient/openstack/common/_i18n.py:43:    # code from oslo-incubator, but is not ready to be internationalized
+ 
+python-tuskarclient/tuskarclient/common/utils.py:21:from oslo_utils import importutils
+ 
+python-tuskarclient/tuskarclient/common/utils.py:27:# Using common methods fromoslo cliutils
+ 
+tripleo-image-elements/test-requirements.txt:3:oslotest
+ 
+tripleo-image-elements/test-requirements.txt:4:oslosphinx
+ 
+tripleo-image-elements/doc/source/conf.py:29:extensions = ['oslosphinx']
+ 
+tripleo-image-elements/tests/base.py:19:from oslotest import base
+ 
+tripleo-image-elements/elements/heat/os-apply-config/etc/heat/heat.conf:664:#ringfile=/etc/oslo/matchmaker_ring.json
+ 
+tripleo-image-elements/elements/cinder/os-apply-config/etc/cinder/cinder.conf:8:[oslo_concurrency]
